@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" routerLink="/home">Home</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/allusers">List Users</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/createuser">Create User</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/login">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <th>Id</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Action </th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.id}}</td>
+        <td>{{user.fname}}</td>
+        <td>{{user.lname}}</td>
+        <td><button class="btn btn-danger" (click)="deleteUser(user)">DELETE</button>
+          <button class="btn btn-primary" (click)="updateUser(user)">EDIT</button>
+          <button class="btn btn-primary" (click)="seeUser(user)">VIEW</button></td>
+      </tr>
+    </tbody>
+    <button class="btn btn-primary" (click)="newUser(user)">CREATE</button>
+  </table>
+</div>
+<div class="container" *ngIf="visible">
+  <h3>Details of {{user.fname}}</h3>
+  <ul>
+      <li class="list-group-item">ID: {{user.id}}</li>
+      <li class="list-group-item">First Name: {{user.fname}}</li>
+      <li class="list-group-item">Last Name: {{user.lname}}</li>
+      <li class="list-group-item">Phone Number: {{user.phone}}</li>
+      <li class="list-group-item">Last Name: {{user.gender}}</li>
+      <li class="list-group-item">Email: {{user.email}}</li>
+    </ul>
+    <button class="btn btn-primary" (click)="cancel()">CANCEL</button>
+</div>

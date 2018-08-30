@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" routerLink="/home">Home</a>
+  
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/allusers">List Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/createuser">Create User</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/login">Logout</a>
+          </li>
+      </ul>
+    </div>
+  </nav>
+
+<div class="container-fluid" mb-5>
+    <form (ngSubmit)="submitForm()" #userForm="ngForm">
+      <!-- <div class="form group">
+          <input type="text" name="id" class="form-control" [(ngModel)]="user.id" placeholder="">
+      </div> -->
+      <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" ngModel name="fname" class="form-control" #fname="ngModel"  placeholder="First Name"
+           required [(ngModel)]="user.fname"
+           [class.is-invalid]="fname.invalid && fname.touched">
+          <span class="text-danger" *ngIf="fname.errors?.required && fname.touched">First Name is required</span>
+      </div>
+
+      <div class="form-group">
+            <label for="lname">Last Name</label>
+            <input type="text" ngModel name="lname" class="form-control" #lname="ngModel"  placeholder="Last Name"
+             required [(ngModel)]="user.lname"
+             [class.is-invalid]="lname.invalid && lname.touched">
+            <span class="text-danger" *ngIf="lname.errors?.required && lname.touched">Last Name is required</span>
+        </div>
+      
+      <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" ngModel name="phone" class="form-control" #phone="ngModel" placeholder="Phone Number"
+            required [(ngModel)]="user.phone" pattern="^\d{10}$"
+            [class.is-invalid]="phone.invalid && phone.touched">
+            <div *ngIf="phone.errors && (phone.invalid || phone.touched)">
+              <span class="text-danger" *ngIf="phone.errors?.required && phone.touched">Phone Number is required</span>
+              <span class="text-danger" *ngIf="phone.errors.pattern">Phone Number must be 10 digits</span>
+            </div>
+      </div>
+
+    <div class="form-group">
+            <label for="gender">Gender</label>
+        <select class="custom-select" ngModel name="gender" [(ngModel)]="user.gender">
+            <option selected>Gender</option>
+            <option *ngFor="let gen of gender">{{ gen }}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" name="email" class="form-control" [(ngModel)]="user.email" placeholder="Email">
+    </div>
+    <div >
+        <input type="submit" [disabled]="userForm.form.invalid" value="Save" class="btn btn-success">
+    </div>
+    </form>
+</div>
